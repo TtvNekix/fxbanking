@@ -5,9 +5,22 @@ Citizen.CreateThread(function()
         TriggerEvent('fx:get', function(core) FX = core end)
         Citizen.Wait(0)
     end
-end)
 
-AddBlip
+    if FXConfig.ShowBlips then
+        for k,v in ipairs(FXConfig.Banks)do
+            local blip = AddBlipForCoord(v.x, v.y, v.z)
+            SetBlipSprite (blip, 108)
+            SetBlipDisplay(blip, 4)
+            SetBlipScale  (blip, 0.75)
+            SetBlipColour (blip, 2)
+            SetBlipAsShortRange(blip, true)
+            BeginTextCommandSetBlipName("STRING")
+            AddTextComponentString("Banco")
+            EndTextCommandSetBlipName(blip)
+        end
+    end
+
+end)
 
 ShowHelpNotification = function(msg, thisFrame, beep, duration)
 	AddTextEntry('HelpNotification', msg)
